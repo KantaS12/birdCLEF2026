@@ -1,0 +1,5 @@
+# EfficientNet-B0 (noisy student) backbone config.
+model:
+  backbone: tf_efficientnet_b0_ns
+  pretrained: true
+  dropout: 0.3

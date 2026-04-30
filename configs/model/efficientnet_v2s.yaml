@@ -1,0 +1,6 @@
+# EfficientNetV2-S backbone — best accuracy/speed tradeoff.
+model:
+  backbone: tf_efficientnetv2_s_in21k
+  pretrained: true
+  dropout: 0.3
+  env_dim: 0

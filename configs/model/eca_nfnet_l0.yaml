@@ -1,0 +1,6 @@
+# eca_nfnet_l0 — strong ensemble partner for EfficientNet.
+model:
+  backbone: eca_nfnet_l0
+  pretrained: true
+  dropout: 0.3
+  env_dim: 0

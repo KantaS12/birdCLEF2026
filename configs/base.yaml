@@ -1,0 +1,68 @@
+# Base configuration — shared defaults for all experiments.
+# Override in experiment configs via YAML merging.
+
+seed: 42
+
+# Data
+data:
+  train_h5: data/cache/train_config_a.h5
+  val_h5:   data/cache/val_config_a.h5
+  num_workers: 4
+  batch_size: 64
+  pin_memory: true
+  use_sampler: true          # sqrt-frequency balanced sampler
+  soundscape_h5: ""             # path to soundscape windows HDF5; empty = disabled
+  soundscape_confidence: 0.3    # min pseudo-label confidence to include window
+
+# Mel-spectrogram (config A by default)
+mel:
+  n_mels: 128
+  n_fft: 1024
+  hop_length: 320
+  fmin: 50.0
+  fmax: 14000.0
+  sample_rate: 32000
+
+# Model
+model:
+  backbone: tf_efficientnetv2_s_in21k
+  n_classes: 234              # BirdCLEF+ 2026 competition taxonomy
+  pretrained: true
+  dropout: 0.3
+  env_dim: 0                  # set >0 to enable environmental conditioning
+
+# Loss
+loss:
+  name: focal_bce             # focal_bce | soft_auc
+  gamma: 2.0
+  label_smoothing: 0.005
+
+# Optimizer
+optimizer:
+  name: adamw
+  lr_head: 1.0e-3
+  lr_backbone: 1.0e-4
+  weight_decay: 1.0e-4
+
+# Scheduler
+scheduler:
+  warmup_epochs: 1
+  min_lr_ratio: 0.01
+
+# Training
+training:
+  epochs: 30
+  use_amp: true
+  max_grad_norm: 5.0
+  output_dir: runs/baseline
+
+# Augmentations
+augmentations:
+  mixup_alpha: 0.5
+  use_spec_augment: true
+  time_mask_max: 40
+  freq_mask_max: 8
+  n_time_masks: 2
+  n_freq_masks: 2
+  gaussian_noise_prob: 0.3
+  gaussian_noise_std: 0.01

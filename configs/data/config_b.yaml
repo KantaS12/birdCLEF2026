@@ -1,0 +1,16 @@
+# Config B mel-spectrogram — wider frequency range, coarser resolution.
+data:
+  train_h5: data/cache/train_config_b.h5
+  val_h5:   data/cache/val_config_b.h5
+  num_workers: 4
+  batch_size: 64
+  pin_memory: true
+  use_sampler: true
+
+mel:
+  n_mels: 64
+  n_fft: 1024
+  hop_length: 160
+  fmin: 20.0
+  fmax: 16000.0
+  sample_rate: 32000
